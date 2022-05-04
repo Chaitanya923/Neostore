@@ -31,3 +31,4 @@ struct ResponseSingleData<T : Codable>: Codable {
         case userMsg = "user_msg"
     }
 }
+

@@ -45,7 +45,7 @@
                             <color key="backgroundColor" red="0.85882352939999995" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="Submit">
+                            <state key="normal" title="Rate Now">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -137,7 +137,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="jaR-zf-jtU" secondAttribute="trailing" constant="50" id="56D-u1-V9y"/>
                 <constraint firstItem="jaR-zf-jtU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="105" id="njP-Kf-sob"/>
@@ -151,6 +151,9 @@
         <image name="slider_img1" width="1500" height="750"/>
         <image name="star_check" width="44" height="44"/>
         <image name="star_unchek" width="44" height="44"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

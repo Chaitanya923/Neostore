@@ -75,6 +75,7 @@ class EditProfileViewController: UIViewController {
                 Email.isUserInteractionEnabled = false
                 Dob.isUserInteractionEnabled = false
                 Submitbtn.setTitle("Edit Profile", for: .normal)
+                self.title = "My Account"
             }
         }
         else{
@@ -85,6 +86,7 @@ class EditProfileViewController: UIViewController {
             Email.isUserInteractionEnabled = true
             Dob.isUserInteractionEnabled = true
             Submitbtn.setTitle("Submit", for: .normal)
+            self.title = "Edit Profile"
         }
     }
     
@@ -123,7 +125,6 @@ class EditProfileViewController: UIViewController {
         let confirmpassword_ip = Lastname.text ?? ""
         let phone_ip = Phone.text ?? ""
         
-        print("Phone :",phone_ip," Email :",email_ip)
         if email_ip.isValidEmail() && password_ip.isEmpty != true && (confirmpassword_ip.isEmpty != true) && phone_ip.isValidPhone(){
             return true
         }
@@ -143,15 +144,9 @@ class EditProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func GoToResetPassword(_ sender: UIButton) {
+        self.navigationController?.pushViewController(ResetPasswordViewController.loadfromnib(), animated: true)
     }
-    */
     @objc
         func cancelAction() {
             self.Dob.resignFirstResponder()

@@ -21,7 +21,6 @@ class Login: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(KeychainManagement().getAccessToken() ?? "Null")
         self.navigationController?.navigationBar.isHidden = true
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(navigatetosidebar))
         
@@ -81,6 +80,12 @@ class Login: UIViewController {
         self.navigationController?.pushViewController(RegisterViewController.loadfromnib(), animated: true)
     }
     
+
+    @IBAction func GotoFP(_ sender: UIButton) {
+        self.navigationController?.pushViewController(ForgotPasswordViewController.loadfromnib(), animated: true)
+    }
+    @IBAction func GotoForgotPassword(_ sender: UITapGestureRecognizer) {
+    }
     func CallService(_ email : String,_ password : String,onhandleresponse:@escaping((Int)->Void))  {
         
         APIServiceDude.shared.login(email: email, password: password){
@@ -105,8 +110,9 @@ class Login: UIViewController {
         let email_ip = username.text ?? ""
         let password_ip = password.text ?? ""
         
-        print("pass:",password_ip.isValidPassword())
-        if email_ip.isValidEmail() && password_ip.isValidPassword(){
+        //print("pass:",password_ip.isValidPassword())
+        if email_ip.isValidEmail() //&& password_ip.isValidPassword()
+        {
             return true
         }
         else{

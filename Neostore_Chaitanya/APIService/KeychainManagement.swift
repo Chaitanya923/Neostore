@@ -34,6 +34,7 @@ class KeychainManagement {
         keychain.set(userModel.phoneNo, forKey: phone)
     }
     
+    
     func addAccessToken(accessToken: String?){
         keychain.set(accessToken ?? "", forKey: tokenKey)
     }
@@ -47,6 +48,9 @@ class KeychainManagement {
         return fullname
     }
     
+    func getpass() -> String? {
+        return keychain.string(forKey: passwordKey)
+    }
     func getUserEmail() -> String? {
         return keychain.string(forKey: emailKey)!
     }

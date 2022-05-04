@@ -5,8 +5,8 @@
 
 import UIKit
 
-var cat_id :  Int = 0
-var p_category_id = [0,1,3,2,4]
+//var cat_id :  Int = 0
+//var p_category_id = [0,1,3,2,4]
 class ProductlistTableViewController: UITableViewController {
     
     static func loadfromnib(_ id : Int) -> UITableViewController {
@@ -149,7 +149,7 @@ class ProductlistTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print()
-        self.navigationController?.pushViewController(ProductdetailsTableViewController.loadfromnib(pro_list[indexPath.row].id), animated: true)
+        self.navigationController?.pushViewController(ProductDetailsViewController.loadfromnib(pro_list[indexPath.row].id), animated: true)
     }
     /*
     // Override to support conditional editing of the table view.
@@ -196,30 +196,4 @@ class ProductlistTableViewController: UITableViewController {
     }
     */
     
-}
-
-var vSpinner : UIView?
-
-extension UIViewController {
-    func showSpinner(onView : UIView) {
-        let spinnerView = UIView.init(frame: onView.bounds)
-        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        let ai = UIActivityIndicatorView.init(style: .large)
-        ai.startAnimating()
-        ai.center = spinnerView.center
-        
-        DispatchQueue.main.async {
-            spinnerView.addSubview(ai)
-            onView.addSubview(spinnerView)
-        }
-        
-        vSpinner = spinnerView
-    }
-    
-    func removeSpinner() {
-        DispatchQueue.main.async {
-            vSpinner?.removeFromSuperview()
-            vSpinner = nil
-        }
-    }
 }

@@ -225,12 +225,19 @@ class APIServiceDude: APIServiceProvider{
             }
             
             print("Response Data: \(String(data: data, encoding: .utf8))")
+            print("T : ",T.self)
             do {
                 let object = try JSONDecoder().decode(T.self, from: data)
+                print(object)
                 completionHandler(.success(object))
             } catch {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
+                    //if json!["status"]! as! Int == 200 {
+                    //    completionHandler(.success("" as! T))
+                    //    return
+                    //}
+                    //else
                     if json!["user_msg"] != nil{
                         completionHandler(.failure(.unsuccess(message: "\(json!["user_msg"]!)")))
                         return

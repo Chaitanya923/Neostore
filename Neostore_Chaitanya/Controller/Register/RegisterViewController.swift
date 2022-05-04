@@ -9,6 +9,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
 
+    var viewModel : RegisterViewModel = RegisterViewModel()
     
     @IBOutlet weak var firstname: UITextField!
     @IBOutlet weak var lastname: UITextField!
@@ -48,7 +49,6 @@ class RegisterViewController: UIViewController {
         
         let imgc = UIImageView(image: imgchckbox)
         imgc.tintColor = .white
-        imgc.backgroundColor = UIColor(named: "")
         TandCchckbox.setImage(imgchckbox, for: .normal)
         
         password.withImage(image: #imageLiteral(resourceName: "password_icon"))
@@ -105,13 +105,12 @@ class RegisterViewController: UIViewController {
         }
         else {
             let UserDataToRegister = UserModel(firstName: fname_ip, lastName: lname_ip, email: email_ip, password: password_ip, confirmPassword: confirmpassword_ip, isMale: ismale_ip, phoneNo: phone_ip)
-            print(UserDataToRegister)
-            callService(UserDataToRegister, onhandleresponse: {
+            
+            viewModel.Register(UserDataToRegister, onhandleresponse: {
                 result in
                 DispatchQueue.main.async {
                     if result == 1{
-                        //self.alerterros("Registeration Successful", "You have successfully registered in NeoSTORE")
-                        self.navigationController!.pushViewController(RootHomeViewController(), animated: true)
+                        self.register_alert("Registeration Successful", "You have successfully registered in NeoSTORE")
                     }
                     else{
                         self.alerterros("Registration Unsuccessful"," Email id already exist")
@@ -119,9 +118,8 @@ class RegisterViewController: UIViewController {
                 }
             })
             
-            //if callService(UserDataToRegister){
                 
-        }
+            }
         }
     }
     
@@ -156,19 +154,13 @@ class RegisterViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
     }
     
-    
-    func callService(_ usermodel: UserModel,onhandleresponse:@escaping((Int)->Void)) {
-        
-        APIServiceDude.shared.register(userModel: usermodel) {  result in
-            switch result {
-            case .success(let resps):
-                KeychainManagement().addUserEmailAndPassword(userModel: usermodel)
-                KeychainManagement().addAccessToken(accessToken: resps.data?.accessToken)
-                onhandleresponse(1)
-            case .failure(_):
-                onhandleresponse(0)
-            }
-        }
+    func register_alert(_ title:String,_ message : String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: RootHomeViewController())
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
@@ -204,22 +196,4 @@ extension UIViewController {
     open override func awakeFromNib() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
-}
-
-extension String {
-    func isValidEmail() -> Bool {
-        // here, `try!` will always succeed because the pattern is valid
-        let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
-        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
-    }
-    
-    public func isValidPassword() -> Bool {
-        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}$"
-        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: self)
-    }
-    func isValidPhone() -> Bool {
-          let regularExpressionForPhone = "^\\d{10}$"
-          let testPhone = NSPredicate(format:"SELF MATCHES %@", regularExpressionForPhone)
-          return testPhone.evaluate(with: self)
-       }
 }

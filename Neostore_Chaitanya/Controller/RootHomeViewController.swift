@@ -28,8 +28,12 @@ class RootHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildVCs()
-        self.navigationController?.navigationBar.isHidden = true
+        //  self.navigationController?.navigationBar.isHidden = true
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func addChildVCs()

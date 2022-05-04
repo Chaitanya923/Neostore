@@ -24,19 +24,42 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Carts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6C-BP-hct">
-                        <rect key="frame" x="42" y="10" width="263" height="22"/>
+                        <rect key="frame" x="42" y="10" width="236" height="22"/>
                         <color key="backgroundColor" red="0.17254901959999999" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgy-vO-9Tj">
+                        <rect key="frame" x="288" y="10" width="22" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3q-ar-EUO">
+                                <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85882352939999995" green="0.08235294118" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="I3q-ar-EUO" firstAttribute="leading" secondItem="Rgy-vO-9Tj" secondAttribute="leading" id="1sZ-s2-Lta"/>
+                            <constraint firstAttribute="bottom" secondItem="I3q-ar-EUO" secondAttribute="bottom" id="9Rg-NW-djA"/>
+                            <constraint firstItem="I3q-ar-EUO" firstAttribute="top" secondItem="Rgy-vO-9Tj" secondAttribute="top" id="oHO-6K-ebR"/>
+                            <constraint firstAttribute="width" constant="22" id="ojY-7z-U37"/>
+                            <constraint firstAttribute="trailing" secondItem="I3q-ar-EUO" secondAttribute="trailing" id="psc-MH-2LG"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Rgy-vO-9Tj" firstAttribute="top" secondItem="o6C-BP-hct" secondAttribute="top" id="AP6-wU-5jB"/>
+                    <constraint firstItem="Rgy-vO-9Tj" firstAttribute="bottom" secondItem="o6C-BP-hct" secondAttribute="bottom" id="ErT-MT-LNQ"/>
                     <constraint firstItem="xCJ-6M-5PS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="F02-oE-v6W"/>
+                    <constraint firstItem="Rgy-vO-9Tj" firstAttribute="height" secondItem="o6C-BP-hct" secondAttribute="height" id="GYl-ZA-qSu"/>
                     <constraint firstItem="o6C-BP-hct" firstAttribute="top" secondItem="xCJ-6M-5PS" secondAttribute="top" id="MF4-7h-83q"/>
                     <constraint firstAttribute="bottom" secondItem="xCJ-6M-5PS" secondAttribute="bottom" constant="10" id="MMU-yk-QXQ"/>
-                    <constraint firstAttribute="trailing" secondItem="o6C-BP-hct" secondAttribute="trailing" constant="15" id="T3w-hM-20M"/>
+                    <constraint firstAttribute="trailing" secondItem="Rgy-vO-9Tj" secondAttribute="trailing" constant="10" id="P2m-Tl-Hy4"/>
                     <constraint firstItem="o6C-BP-hct" firstAttribute="leading" secondItem="xCJ-6M-5PS" secondAttribute="trailing" constant="15" id="fVi-wE-3uv"/>
+                    <constraint firstItem="Rgy-vO-9Tj" firstAttribute="leading" secondItem="o6C-BP-hct" secondAttribute="trailing" constant="10" id="gsL-KT-zPu"/>
                     <constraint firstItem="o6C-BP-hct" firstAttribute="bottom" secondItem="xCJ-6M-5PS" secondAttribute="bottom" id="hc9-TC-x17"/>
                     <constraint firstItem="o6C-BP-hct" firstAttribute="centerY" secondItem="xCJ-6M-5PS" secondAttribute="centerY" id="s4f-Fl-mDp"/>
                     <constraint firstItem="xCJ-6M-5PS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="zah-TF-AMR"/>
@@ -46,6 +69,8 @@
             <color key="backgroundColor" red="0.17254901959999999" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="Navlabel" destination="o6C-BP-hct" id="G0c-5X-9OE"/>
+                <outlet property="badgelabel" destination="I3q-ar-EUO" id="jAz-a4-hbS"/>
+                <outlet property="badgeview" destination="Rgy-vO-9Tj" id="2NP-AW-g5q"/>
                 <outlet property="navimg" destination="xCJ-6M-5PS" id="iVw-wT-Nfa"/>
             </connections>
             <point key="canvasLocation" x="28.985507246376812" y="76.339285714285708"/>

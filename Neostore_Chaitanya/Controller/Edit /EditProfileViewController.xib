@@ -75,6 +75,17 @@
                         <action selector="submit:" destination="-1" eventType="touchUpInside" id="8hS-4e-XdL"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-xM-ftG">
+                    <rect key="frame" x="0.0" y="807" width="414" height="55"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <state key="normal" title="RESET PASSWORD">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="GoToResetPassword:" destination="-1" eventType="touchUpInside" id="cK4-1q-MeE"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,12 +99,16 @@
                 <constraint firstItem="hgA-Uf-oQz" firstAttribute="top" secondItem="lAS-Ry-ofU" secondAttribute="bottom" constant="20" id="BzJ-12-oTU"/>
                 <constraint firstItem="hgA-Uf-oQz" firstAttribute="height" secondItem="lAS-Ry-ofU" secondAttribute="height" id="DVi-Ng-ufw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lAS-Ry-ofU" secondAttribute="trailing" constant="20" id="DnB-lY-rwD"/>
+                <constraint firstItem="8rI-xM-ftG" firstAttribute="height" secondItem="RwP-QN-BGe" secondAttribute="height" id="Fkw-k8-Goq"/>
                 <constraint firstItem="B5p-49-7Xz" firstAttribute="leading" secondItem="hgA-Uf-oQz" secondAttribute="leading" id="HPk-Va-F01"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8rI-xM-ftG" secondAttribute="trailing" id="HZk-6u-01F"/>
+                <constraint firstItem="8rI-xM-ftG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="J9T-Bb-a6T"/>
                 <constraint firstItem="Fc9-2r-hZY" firstAttribute="leading" secondItem="lAS-Ry-ofU" secondAttribute="leading" id="OBQ-h9-Pru"/>
                 <constraint firstItem="4IZ-FF-xQO" firstAttribute="top" secondItem="B5p-49-7Xz" secondAttribute="bottom" constant="20" id="QfE-x8-RCk"/>
                 <constraint firstItem="Fc9-2r-hZY" firstAttribute="trailing" secondItem="lAS-Ry-ofU" secondAttribute="trailing" id="RSh-KA-PJ7"/>
                 <constraint firstItem="lAS-Ry-ofU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="VAK-WU-sVT"/>
                 <constraint firstItem="B5p-49-7Xz" firstAttribute="height" secondItem="hgA-Uf-oQz" secondAttribute="height" id="VCT-uD-QvW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8rI-xM-ftG" secondAttribute="bottom" id="YuZ-Bu-MdO"/>
                 <constraint firstItem="ePy-A9-Zxr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="bH5-Bp-xGe"/>
                 <constraint firstItem="4IZ-FF-xQO" firstAttribute="leading" secondItem="B5p-49-7Xz" secondAttribute="leading" id="cv6-EW-jo5"/>
                 <constraint firstItem="RwP-QN-BGe" firstAttribute="top" secondItem="Fc9-2r-hZY" secondAttribute="bottom" constant="20" id="dck-es-Vzh"/>

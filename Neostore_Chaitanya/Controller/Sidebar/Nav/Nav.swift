@@ -11,10 +11,13 @@ class Nav: UITableViewCell {
 
     @IBOutlet weak var navimg: UIImageView!
     @IBOutlet weak var Navlabel: UILabel!
+    @IBOutlet weak var badgeview: UIView!
+    @IBOutlet weak var badgelabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

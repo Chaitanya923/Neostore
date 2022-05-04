@@ -66,6 +66,7 @@ class ProductRateDialogueViewController: UIViewController {
         setimg(5)
     }
     
+    
     func setimg(_ n : Int){
         ratingvalue = n
         Star1.setImage((n>=1 ? stargold : starw), for: .normal)

@@ -13,8 +13,25 @@ let sidelistimage = ["shoppingcart_icon","table","sofa_icon","chair","cupboard",
 
 class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var total : Int = 0
+    
     static func loadfromnib() -> UIViewController {
         return SideMenuViewController(nibName: "SideMenuViewController", bundle: nil)
+    }
+    
+    func CallService() {
+        APIServiceDude.shared.getMyCartDetails(accessToken: KeychainManagement().getAccessToken()) { result in
+            
+            DispatchQueue.main.async { [self] in
+                switch result{
+                case .success(let resps):
+                    total = Int(resps.count)
+                    menutable.reloadData()
+                case .failure(_):
+                    print("error")
+                }
+            }
+        }
     }
     
      func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,8 +54,12 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.section {
         case 0 :
             let cell = tableView.dequeueReusableCell(withIdentifier: "NavprofileCell", for: indexPath) as! NavprofileTableViewCell
-            cell.name.text = KeychainManagement().getUserName()
-            cell.email.text = KeychainManagement().getUserEmail()
+            CallService(KeychainManagement().getAccessToken() ?? "") { name, email in
+                DispatchQueue.main.async {
+                cell.name.text = name
+                cell.email.text = email
+                }
+            }
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -46,7 +67,12 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
             let cell = tableView.dequeueReusableCell(withIdentifier: "NavCell", for: indexPath) as! Nav
             cell.Navlabel.text = sidelist[indexPath.row]
             cell.navimg.image = #imageLiteral(resourceName: sidelistimage[indexPath.row])
-//            cell.Navlabel = sidelist[indexPath.row]
+            if indexPath.row == 0 {
+                cell.badgeview.isHidden = false
+                cell.badgelabel.text = String(total)
+            } else {
+                cell.badgeview.isHidden = true
+            }
             cell.selectionStyle = .none
             return cell
         default:
@@ -79,9 +105,14 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         case 1:
             switch indexPath.row {
             case 0:
-                self.navigationController?.pushViewController(CartTableViewController.loadFromNib(), animated: true)
+                if total == 0 {
+                    
+                }
+                else {
+                    self.navigationController?.pushViewController(CartListViewController.loadFromNib(), animated: true)
+                }
             case 1...4:
-                self.navigationController?.pushViewController(ProductlistTableViewController.loadfromnib(indexPath.row) , animated: true)
+                self.navigationController?.pushViewController(ProductListViewController.loadfromnib(indexPath.row) , animated: true)
             case 5:
                 self.navigationController?.pushViewController(EditProfileViewController.loadfromnib(), animated: true)
             case 7:
@@ -91,7 +122,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
                 UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: Login.loadfromnib())
                 UIApplication.shared.windows.first?.makeKeyAndVisible()
             default:
-                print("NA")
+                break
             }
         default:
         print("NA")
@@ -111,22 +142,34 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         menutable.register(UINib(nibName: "Nav", bundle: nil), forCellReuseIdentifier: "NavCell")
         
         menutable.register(UINib(nibName: "NavprofileTableViewCell", bundle: nil), forCellReuseIdentifier: "NavprofileCell")
-                // Do any additional setup after loading the view.
+            
+        
+    // Do any additional setup after loading the view.
+        CallService()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        CallService()
     }
 
     
-    func  CallService(_ accesstoken : String) {
+    func  CallService(_ accesstoken : String,onhandleresponse : @escaping(_ name : String, _ email: String)-> Void) {
         APIServiceDude.shared.getUserDetails(accessToken: accesstoken) { Result in
             
             switch Result {
             case .success(let resps):
                 print(resps)
+                onhandleresponse(resps.data.userData.firstName + resps.data.userData.lastName,resps.data.userData.email)
             case .failure(let respf):
                 print(respf)
             }
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if animated == true {
+            //CallService(KeychainManagement().getAccessToken() ?? "")
+        }
+    }
     /*
     // MARK: - Navigation
 

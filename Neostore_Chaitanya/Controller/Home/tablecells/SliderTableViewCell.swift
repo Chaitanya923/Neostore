@@ -45,6 +45,7 @@ class SliderTableViewCell: UITableViewCell , UICollectionViewDelegate, UICollect
             let cellWidth = UIScreen.main.bounds.size.width
         return CGSize(width: cellWidth, height: UIScreen.main.bounds.height * 0.3)
         }
+    /*
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -56,5 +57,6 @@ class SliderTableViewCell: UITableViewCell , UICollectionViewDelegate, UICollect
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             return 0
         }
+    */
     
 }

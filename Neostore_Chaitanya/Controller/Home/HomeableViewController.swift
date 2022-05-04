@@ -13,7 +13,7 @@ protocol HomeControllerDelegate: AnyObject {
 class HomeableViewController: UITableViewController, CategoryTableViewCellDelegate {
     func gotoProductlist(_ p: Int) {
         print("p = ", p)
-        self.navigationController?.pushViewController(ProductlistTableViewController.loadfromnib(p), animated: true)
+        self.navigationController?.pushViewController(ProductListViewController.loadfromnib(p), animated: true)
     }
     
     
@@ -64,7 +64,7 @@ class HomeableViewController: UITableViewController, CategoryTableViewCellDelega
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

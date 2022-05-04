@@ -96,7 +96,7 @@ static func loadfromnib() -> UITableViewController {
         case 1:
             switch indexPath.row {
             case 0:
-                self.navigationController?.pushViewController(CartTableViewController.loadFromNib(), animated: true)
+                self.navigationController?.pushViewController(CartListViewController.loadFromNib(), animated: true)
             case 1...4:
                 self.navigationController?.pushViewController(ProductlistTableViewController.loadfromnib(indexPath.row) , animated: true)
             case 5:

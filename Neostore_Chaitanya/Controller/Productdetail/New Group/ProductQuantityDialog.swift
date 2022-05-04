@@ -26,18 +26,17 @@ class ProductQuantityDialog: UIViewController {
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var Prod_img: UIImageView!
     
+    
     @IBAction func submitBtnTap(_ sender: UIButton) {
-        print("on submit")
-        
         let ptemp = quantityField.text!
         guard let pt = Int(ptemp) else { return  }
-        print(pt," : ", type(of: pt))
         
         CallService_AddtoCart(pt, onhandleresponse: {
             reult in
             DispatchQueue.main.async {
                 if reult == 1{
                     print("added to cart")
+                    
                 }
                 else{
                     print("not added")
@@ -58,18 +57,20 @@ class ProductQuantityDialog: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         quantityField.delegate = self
         
         bgView.isOpaque = true
+        
         alertView.layer.cornerRadius = 10
         submitBtn.layer.cornerRadius = 7
-        //bgView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(onBgViewTap)))
+        bgView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(onBgViewTap)))
+        
         CallService_fetch(prr_id, onhandlersponse: {
             result in
             DispatchQueue.main.async { [self] in
                 if result == 1 {
                     Producttitle.text = P_title
+                    
                     DispatchQueue.global().async {
                         // Fetch Image Data
                         if let data = try? Data(contentsOf: URL(string: P_img)!) {

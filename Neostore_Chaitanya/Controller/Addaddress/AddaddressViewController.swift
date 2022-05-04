@@ -107,7 +107,10 @@ class AddaddressViewController: UIViewController {
     
     func alerterros (_ title:String,_ message : String){
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            self.navigationController?.pushViewController(RootHomeViewController(), animated: true)
+        }))
+        //alert.addAction(()
             self.present(alert, animated: true, completion: nil)
     }
     

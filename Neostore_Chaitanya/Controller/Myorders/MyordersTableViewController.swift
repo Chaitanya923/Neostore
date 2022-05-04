@@ -31,7 +31,7 @@ class MyordersTableViewController: UITableViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "search_icon"))
         
-        
+        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -74,7 +74,7 @@ class MyordersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(OrderidTableViewController.loadfromnib(Omodel[indexPath.row].id) , animated: true)
+        self.navigationController?.pushViewController(OrderIdViewController.loadfromnib(Omodel[indexPath.row].id) , animated: true)
     }
 
     /*

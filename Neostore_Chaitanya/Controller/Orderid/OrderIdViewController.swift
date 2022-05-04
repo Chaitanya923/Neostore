@@ -1,29 +1,34 @@
 //
-//  OrderidTableViewController.swift
+//  OrderIdViewController.swift
 //  Neostore_Chaitanya
 //
-//  Created by Neosoft on 07/01/22.
+//  Created by neosoft on 24/02/22.
 //
 
 import UIKit
+
 var id : Int = 0
-class OrderidTableViewController: UITableViewController {
-     
-    var Odetail : [OrderDetail] = []
-    var totalcost : Int = 0
-    static func loadfromnib(_ idd : Int) -> UITableViewController {
-        id = idd
-        return OrderidTableViewController(nibName: "OrderidTableViewController", bundle:nil)
-    }
+
+class OrderIdViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    @IBOutlet weak var OrderIdtableview: UITableView!
+    
+    
+   var Odetail : [OrderDetail] = []
+   var totalcost : Int = 0
+   static func loadfromnib(_ idd : Int) -> UIViewController {
+       id = idd
+       return OrderIdViewController(nibName: "OrderIdViewController", bundle:nil)
+   }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.tableView.register(UINib(nibName: "OrderidTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderidCell")
-        self.tableView.register(UINib(nibName: "AmountTVCell", bundle: nil), forCellReuseIdentifier: "amountTVCell")
+        OrderIdtableview.delegate = self
+        OrderIdtableview.dataSource = self
+        
+        OrderIdtableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        OrderIdtableview.register(UINib(nibName: "OrderidTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderidCell")
+        OrderIdtableview.register(UINib(nibName: "AmountTVCell", bundle: nil), forCellReuseIdentifier: "amountTVCell")
         
         CallService()
         
@@ -41,21 +46,17 @@ class OrderidTableViewController: UITableViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "search_icon"))
         
-                // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Do any additional setup after loading the view.
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section{
         case 0:
@@ -66,10 +67,11 @@ class OrderidTableViewController: UITableViewController {
         
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderidCell", for: indexPath) as! OrderidTableViewCell
@@ -98,42 +100,22 @@ class OrderidTableViewController: UITableViewController {
             return cell
         }
     }
+   
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func CallService(){
+        APIServiceDude.shared.orderDetails(accessToken: KeychainManagement().getAccessToken(), orderID: id) { result in
+            DispatchQueue.main.async { [self] in
+                switch result {
+                case .success(let resps):
+                    Odetail = resps.data.orderDetails
+                    totalcost = resps.data.cost
+                    OrderIdtableview.reloadData()
+                case .failure(_):
+                    break
+                }
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     /*
     // MARK: - Navigation
 
@@ -143,18 +125,5 @@ class OrderidTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    func CallService(){
-        APIServiceDude.shared.orderDetails(accessToken: KeychainManagement().getAccessToken(), orderID: id) { result in
-            DispatchQueue.main.async { [self] in
-                switch result {
-                case .success(let resps):
-                    Odetail = resps.data.orderDetails
-                    totalcost = resps.data.cost
-                    tableView.reloadData()
-                case .failure(_):
-                    break
-                }
-            }
-        }
-    }
+
 }
